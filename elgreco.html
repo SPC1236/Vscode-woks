@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   El Greco SL Cafe
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=Pacifico&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   * {
+    box-sizing: border-box;
+   }
+   body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #f0f4f8;
+    color: #2a2f45;
+   }
+   a {
+    color: inherit;
+    text-decoration: none;
+   }
+   img {
+    max-width: 100%;
+    display: block;
+   }
+   header {
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgb(30 41 59 / 0.3);
+   }
+   .logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: #fbbf24;
+   }
+   nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+   }
+   nav ul li a {
+    font-weight: 600;
+    transition: color 0.3s ease;
+    color: #f1f5f9;
+   }
+   nav ul li a:hover,
+   nav ul li a:focus {
+    color: #fb4124;
+   }
+   .menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #f1f5f9;
+   }
+   main {
+    max-width: 1200px;
+    margin: 3rem auto 5rem;
+    padding: 0 1rem;
+   }
+   footer {
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 -2px 8px rgb(30 41 59 / 0.3);
+   }
+   footer .social-icons {
+    margin: 1rem 0 0.5rem;
+   }
+   footer .social-icons a {
+    color: #fbbf24;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+   }
+   footer .social-icons a:hover,
+   footer .social-icons a:focus {
+    color: #f1f5f9;
+   }
+   footer p {
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0;
+   }
+   section {
+    margin-bottom: 4rem;
+   }
+   h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    text-align: center;
+   }
+   /* Hero Section */
+   .hero {
+    position: relative;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgb(30 41 59 / 0.15);
+    background: #fbbf24;
+    color: #1e293b;
+    text-align: center;
+   }
+   .hero img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: brightness(0.5);
+    z-index: -1;
+    border-radius: 12px;
+   }
+   .hero-content {
+    max-width: 700px;
+   }
+   .hero-content h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 6px rgb(255 255 255 / 0.7);
+   }
+   .hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 4px rgb(255 255 255 / 0.6);
+   }
+   .hero-content a.button {
+    background: #1e293b;
+    color: #fbbf24;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgb(30 41 59 / 0.6);
+    transition: background-color 0.3s ease;
+    display: inline-block;
+   }
+   .hero-content a.button:hover,
+   .hero-content a.button:focus {
+    background: #374151;
+    color: #fbbf24;
+   }
+   /* About Page */
+   .about-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+   }
+   .about-text {
+    flex: 1 1 400px;
+    color: #334155;
+   }
+   .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+   }
+   .about-image {
+    flex: 1 1 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgb(30 41 59 / 0.15);
+   }
+   /* Menu Page */
+   .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+   }
+   .menu-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(30 41 59 / 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+   }
+   .menu-item:hover,
+   .menu-item:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgb(30 41 59 / 0.2);
+   }
+   .menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+   }
+   .menu-item-content {
+    padding: 1rem 1.5rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   }
+   .menu-item-content h3 {
+    margin: 0 0 0.5rem;
+    color: #1e293b;
+   }
+   .menu-item-content p {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #475569;
+    margin-bottom: 1rem;
+   }
+   .menu-item-content .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fbbf24;
+   }
+   /* Specials Page */
+   .specials {
+    background: #fef3c7;
+    padding: 3rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 4rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+   }
+   .specials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+   }
+   .special-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(30 41 59 / 0.1);
+    width: 280px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+   }
+   .special-item:hover,
+   .special-item:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgb(30 41 59 / 0.2);
+   }
+   .special-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+   }
+   .special-item-content {
+    padding: 1rem 1.25rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   }
+   .special-item-content h3 {
+    margin: 0 0 0.5rem;
+    color: #1e293b;
+   }
+   .special-item-content p {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #475569;
+    margin-bottom: 1rem;
+   }
+   .special-item-content .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fbbf24;
+   }
+   /* Reviews Page */
+   .reviews-container {
+    max-width: 900px;
+    margin: 0 auto;
+    color: #334155;
+   }
+   .review {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(30 41 59 / 0.1);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+   }
+   .review h3 {
+    margin: 0 0 0.5rem;
+    color: #1e293b;
+   }
+   .review p {
+    font-size: 1rem;
+    line-height: 1.5;
+   }
+   .review .author {
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #fbbf24;
+   }
+   /* Contact Page */
+   #contact {
+    max-width: 600px;
+    margin: 0 auto 5rem;
+    color: #334155;
+   }
+   #contact h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 2rem;
+   }
+   form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(30 41 59 / 0.1);
+   }
+   label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+   }
+   input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #fbbf24;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    font-family: inherit;
+    color: #2a2f45;
+   }
+   input:focus, textarea:focus {
+    outline: none;
+    border-color: #d97706;
+    box-shadow: 0 0 5px #d97706;
+   }
+   button[type="submit"] {
+    background: #fbbf24;
+    color: #1e293b;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgb(251 191 36 / 0.6);
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+   }
+   button[type="submit"]:hover,
+   button[type="submit"]:focus {
+    background: #d97706;
+    color: #fff;
+   }
+   /* Responsive Nav */
+   @media (max-width: 768px) {
+    nav ul {
+     position: fixed;
+     top: 60px;
+     right: 0;
+     background: #1e293b;
+     height: calc(100% - 60px);
+     width: 220px;
+     flex-direction: column;
+     padding-top: 2rem;
+     transform: translateX(100%);
+     transition: transform 0.3s ease;
+     box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+    }
+    nav ul.open {
+     transform: translateX(0);
+    }
+    nav ul li {
+     margin-bottom: 1.5rem;
+     text-align: center;
+    }
+    .menu-toggle {
+     display: block;
+    }
+    .about-container {
+     flex-direction: column;
+    }
+   }
+  </style>
+ </head>
+ <body>
+  <header>
+   <a aria-label="El Greco SL Cafe Home" class="logo" href="#home">
+    El Greco SL
+   </a>
+   <nav>
+    <button aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation menu" class="menu-toggle">
+     <i class="fas fa-bars"></i>
+    </button>
+    <ul id="primary-navigation" role="menu">
+     <li role="none"><a href="#home" role="menuitem">Home</a></li>
+     <li role="none"><a href="#about" role="menuitem">About</a></li>
+     <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
+     <li role="none"><a href="#reviews" role="menuitem">Reviews</a></li>
+     <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+    </ul>
+   </nav>
+  </header>
+
+  <main>
+   <!-- Home Page -->
+   <section id="home" aria-label="Business introduction and services overview">
+    <div class="hero">
+     <img alt="Interior of El Greco SL cafe with warm lighting, wooden tables, and cozy atmosphere" height="600" src="https://storage.googleapis.com/a1aa/image/88270a70-5df1-4ba0-650b-d0db74c7cbc8.jpg" width="1920"/>
+     <div class="hero-content">
+      <h1>Welcome to El Greco SL</h1>
+      <p>Experience authentic flavors and a cozy atmosphere inspired by tradition and passion.</p>
+      <a class="button" href="#menu" role="button">Discover Our Menu</a>
+     </div>
+    </div>
+   </section>
+
+   <!-- About Page -->
+   <section id="about" aria-label="Background information and mission statement">
+    <h2>About El Greco SL</h2>
+    <div class="about-container">
+     <div class="about-text">
+      <p>El Greco SL is a charming cafe located in the heart of the city, offering a unique blend of traditional and modern coffee experiences. Our passion for quality and community shines through every cup we serve. We are committed to sustainability, supporting local producers, and creating a welcoming space for all.</p>
+      <p>Our mission is to bring the rich heritage of Greek coffee culture to our community, providing exceptional beverages and delicious traditional treats in a warm and inviting environment.</p>
+     </div>
+     <div class="about-image">
+      <img alt="Barista preparing coffee with latte art in El Greco SL cafe with rustic wooden counters and warm ambient lighting" height="400" src="https://storage.googleapis.com/a1aa/image/7d64e2b2-7dd8-41e0-69e1-2e216ea6522d.jpg" width="600"/>
+     </div>
+    </div>
+   </section>
+
+   <!-- Menu Page -->
+   <section id="menu" aria-label="List and descriptions of menu items">
+    <h2>Our Menu</h2>
+    <div class="menu-grid">
+     <article aria-label="El Greco Espresso -Le30" class="menu-item" tabindex="0">
+      <img alt="Close-up of El Greco Espresso cup with rich crema on wooden table" height="200" src="https://storage.googleapis.com/a1aa/image/e6a82409-10e4-4956-05a6-4bd2b8b084c5.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>El Greco Espresso</h3>
+       <p>Intense and aromatic espresso made from our signature blend of beans.</p>
+       <div class="price">Le30</div>
+      </div>
+     </article>
+     <article aria-label="Greek Cappuccino - Le45" class="menu-item" tabindex="0">
+      <img alt="Cup of Greek Cappuccino with frothy milk and cinnamon dusting on wooden table" height="200" src="https://storage.googleapis.com/a1aa/image/3cc48e7b-bc56-4f49-44e3-c751ea5b5d35.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Greek Cappuccino</h3>
+       <p>Creamy cappuccino with a hint of cinnamon, inspired by traditional Greek flavors.</p>
+       <div class="price">Le45</div>
+      </div>
+     </article>
+     <article aria-label="Honey Latte - Le48 " class="menu-item" tabindex="0">
+      <img alt="Glass cup of honey latte with creamy milk and honey drizzle on wooden table" height="200" src="https://storage.googleapis.com/a1aa/image/c5c8dfd4-0b21-4245-25a2-66e8ad3421c6.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Honey Latte</h3>
+       <p>Smooth latte sweetened with natural honey for a delicate floral note.</p>
+       <div class="price">Le48</div>
+      </div>
+     </article>
+     <article aria-label="Frappe Coffee - Le46" class="menu-item" tabindex="0">
+      <img alt="Tall glass of frappe coffee with ice cubes and frothy top on wooden table" height="200" src="https://storage.googleapis.com/a1aa/image/62c09862-aad3-4d02-f9a1-75de99e878f1.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Frappe Coffee</h3>
+       <p>Classic Greek iced coffee with a frothy top, perfect for warm days.</p>
+       <div class="price">Le46</div>
+      </div>
+     </article>
+     <article aria-label="Baklava Pastry - Le36" class="menu-item" tabindex="0">
+      <img alt="Slice of baklava pastry with honey glaze and nuts on white plate" height="200" src="https://storage.googleapis.com/a1aa/image/9cd46320-6269-46bf-77d9-3584571ac649.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Baklava Pastry</h3>
+       <p>Traditional sweet pastry layered with nuts and honey syrup.</p>
+       <div class="price">Le36</div>
+      </div>
+     </article>
+     <article aria-label="Greek Yogurt with Honey and Nuts - Le42" class="menu-item" tabindex="0">
+      <img alt="Bowl of Greek yogurt topped with honey and walnuts on wooden table" height="200" src="https://storage.googleapis.com/a1aa/image/ed292b23-1e14-46bf-612f-ad6af160c9e8.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Greek Yogurt with Honey &amp; Nuts</h3>
+       <p>Creamy Greek yogurt drizzled with honey and sprinkled with crunchy walnuts.</p>
+       <div class="price">Le42</div>
+      </div>
+     </article>
+     <article aria-label="Spanakopita - Le48" class="menu-item" tabindex="0">
+      <img alt="Slice of spanakopita spinach and feta pie on rustic plate" height="200" src="https://storage.googleapis.com/a1aa/image/1c2f82e6-c73e-49a8-73cb-f83fa6204de4.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Spanakopita</h3>
+       <p>Traditional Greek spinach and feta cheese pie wrapped in flaky phyllo dough.</p>
+       <div class="price">48,000 Leones</div>
+      </div>
+     </article>
+     <article aria-label="Loukoumades - Le36" class="menu-item" tabindex="0">
+      <img alt="Plate of loukoumades Greek honey doughnuts with powdered sugar and honey drizzle" height="200" src="https://storage.googleapis.com/a1aa/image/cba8425c-5a47-4fec-598f-68db6dcf1af5.jpg" width="400"/>
+      <div class="menu-item-content">
+       <h3>Loukoumades</h3>
+       <p>Golden fried dough balls drizzled with honey and sprinkled with cinnamon and powdered sugar.</p>
+       <div class="price">Le37</div>
+      </div>
+     </article>
+    </div>
+   </section>
+
+   <!-- Reviews Page -->
+   <section id="reviews" aria-label="Customer reviews and feedback">
+    <h2>Customer Reviews</h2>
+    <div class="reviews-container">
+     <article class="review" tabindex="0">
+      <h3>Maria K.</h3>
+      <p>"El Greco SL is my favorite spot in town! The coffee is authentic and the atmosphere is so welcoming. The baklava is to die for!"</p>
+      <div class="author">★★★★★</div>
+     </article>
+     <article class="review" tabindex="0">
+      <h3>James T.</h3>
+      <p>"I love their frappe coffee, especially on hot days. The staff is friendly and the place is always clean and cozy."</p>
+      <div class="author">★★★★☆</div>
+     </article>
+     <article class="review" tabindex="0">
+      <h3>Elena P.</h3>
+      <p>"The spanakopita and Greek yogurt with honey are delicious. A perfect blend of traditional flavors and modern comfort."</p>
+      <div class="author">★★★★★</div>
+     </article>
+     <article class="review" tabindex="0">
+      <h3>David M.</h3>
+      <p>"Great place to relax and enjoy quality coffee. The honey latte is a must-try!"</p>
+      <div class="author">★★★★☆</div>
+     </article>
+    </div>
+   </section>
+
+   <!-- Contact Page -->
+   <section id="contact" aria-label="Email form, business location, and social media links">
+    <h2>Contact Us</h2>
+    <form aria-label="Contact form to send message to El Greco SL Cafe">
+     <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" required="" type="text"/>
+     </div>
+     <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" required="" type="email"/>
+     </div>
+     <div>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required="" rows="5"></textarea>
+     </div>
+     <button type="submit">Send Message</button>
+    </form>
+    <section aria-label="Business location and social media" style="max-width:600px; margin: 2rem auto 0; text-align:center; color:#475569;">
+     <h3 style="font-family: 'Pacifico', cursive; font-size: 1.8rem; color: #1e293b; margin-bottom: 1rem;">Visit Us</h3>
+     <p>123 El Greco Street, Freetown, Sierra Leone</p>
+     <iframe aria-label="Map location of El Greco SL Cafe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.9279279279277!2d-13.26152268466107!3d8.48429529379209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec0b8f3a1a1a1a1%3A0x123456789abcdef!2sEl%20Greco%20SL!5e0!3m2!1sen!2sle!4v1687000000000!5m2!1sen!2sle" style="border:0; width:100%; height:250px; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     <div class="social-icons" style="margin-top:1rem;">
+      <a aria-label="Facebook" href="https://facebook.com/ElGrecoSL" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-facebook-f"></i></a>
+      <a aria-label="Instagram" href="https://instagram.com/ElGrecoSL" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-instagram"></i></a>
+      <a aria-label="Twitter" href="https://twitter.com/ElGrecoSL" rel="noopener" target="_blank"><i aria-hidden="true" class="fab fa-twitter"></i></a>
+     </div>
+    </section>
+   </section>
+  </main>
+
+  <footer>
+   <div aria-label="Social media links" class="social-icons">
+    <a aria-label="Facebook" href="https://facebook.com/ElGrecoSL" rel="noopener" target="_blank">
+     <i aria-hidden="true" class="fab fa-facebook-f"></i>
+    </a>
+    <a aria-label="Instagram" href="https://instagram.com/ElGrecoSL" rel="noopener" target="_blank">
+     <i aria-hidden="true" class="fab fa-instagram"></i>
+    </a>
+    <a aria-label="Twitter" href="https://twitter.com/ElGrecoSL" rel="noopener" target="_blank">
+     <i aria-hidden="true" class="fab fa-twitter"></i>
+    </a>
+   </div>
+   <p>© 2024 El Greco SL. All rights reserved.</p>
+  </footer>
+
+  <script>
+   const menuToggle = document.querySelector('.menu-toggle');
+   const navMenu = document.querySelector('nav ul');
+
+   menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('open');
+   });
+
+   navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+     if (navMenu.classList.contains('open')) {
+      navMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', false);
+     }
+    });
+   });
+  </script>
+ </body>
+</html>

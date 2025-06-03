@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Type Annotations - Presentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0b0c0c;
+      color: #a4c32b;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #3f044a;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      animation: slideDown 1s ease-out;
+    }
+    h1, h2, h3 {
+      color: white;
+    }
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      animation: fadeIn 1.5s ease-in;
+    }
+    section {
+      margin-bottom: 40px;
+      transition: transform 0.3s;
+    }
+    section:hover {
+      transform: scale(1.02);
+    }
+    code, pre {
+      background: #010c18;
+      padding: 10px;
+      border-left: 4px solid #e8d71a;
+      display: block;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ae5fb7;
+      padding: 10px;
+    }
+    th {
+      background: #060608;
+    }
+    footer {
+      background: #131313;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python Type Annotations</h1>
+    <p>Python's Safety Labels</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🧠 What Are Type Annotations?</h2>
+      <p>Type annotations specify the expected data types for variables, function parameters, and return values.<br>
+         They're optional but highly recommended for improving code clarity, documentation, and error checking using tools like <code>mypy</code>.</p>
+    </section>
+
+    <section>
+      <h2>📚 Why Use Them?</h2>
+      <ul>
+        <li>Improves code readability and structure</li>
+        <li>Helps catch type-related bugs early</li>
+        <li>Supports robust API design (e.g., with FastAPI)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🔢 Basic Type Annotations</h2>
+      <p>Python supports annotations for built-in types:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>int</strong></td>
+            <td>Integer numbers</td>
+            <td><code>age: int = 25</code></td>
+          </tr>
+          <tr>
+            <td><strong>float</strong></td>
+            <td>Decimal numbers</td>
+            <td><code>price: float = 19.99</code></td>
+          </tr>
+          <tr>
+            <td><strong>str</strong></td>
+            <td>Text strings</td>
+            <td><code>name: str = "Alice"</code></td>
+          </tr>
+          <tr>
+            <td><strong>bool</strong></td>
+            <td>Boolean values</td>
+            <td><code>is_active: bool = True</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+  <h2>📘 When to Use Which Type</h2>
+  <ul>
+    <li><strong>int</strong>: Use for whole numbers like <code>age = 25</code> or <code>count = 100</code></li>
+    <li><strong>float</strong>: Use for decimal values or precise quantities like <code>price = 19.99</code></li>
+    <li><strong>str</strong>: Use for text like <code>name = "Alice"</code> or <code>message = "Hello"</code></li>
+    <li><strong>bool</strong>: Use for true/false flags like <code>is_active = True</code></li>
+    <li><strong>list</strong>: Use for ordered, changeable sequences like <code>colors = ["red", "blue"]</code></li>
+    <li><strong>tuple</strong>: Use for fixed-size collections like <code>coordinates = (10.5, 20.3)</code></li>
+    <li><strong>dict</strong>: Use for key-value pairs like <code>{"name": "Bob", "age": 30}</code></li>
+    <li><strong>set</strong>: Use when you need unique values only like <code>{"apple", "banana"}</code></li>
+    <li><strong>Any</strong>: Use when you're unsure of the type, or it can be anything — like external input.</li>
+  </ul>
+  <p><strong>Quick Tip:</strong> Use <code>list</code> when order matters, <code>dict</code> for structured data, <code>set</code> when duplicates must be avoided <code>Any</code> for generic or flexible values.</p>
+</section>
+
+    <section>
+      <h2>🔁 Function Annotations</h2>
+      <p>Annotate parameters and return types for more reliable functions:</p>
+      <pre><code>def greet(name: str) -> str:
+    return f"Hello, {name}"</code></pre>
+
+      <pre><code>from typing import List
+
+def average(scores: List[float]) -> float:
+    return sum(scores) / len(scores)</code></pre>
+    </section>
+
+    <section>
+      <h2>✨ Something New: TypedDict</h2>
+      <p><code>TypedDict</code> allows you to define structured dictionaries with fixed key-value types. <br>
+        It’s useful when modeling JSON-like data.</p>
+
+      <pre><code>from typing import TypedDict
+
+class UserProfile(TypedDict):
+    name: str
+    age: int
+    is_active: bool
+    balance: float</code></pre>
+
+      <pre><code>user: UserProfile = {
+    "name": "Sarah",
+    "age": 28,
+    "is_active": True,
+    "balance": 245.75
+}</code></pre>
+
+      <p>This ensures consistency and validation when passing around complex data.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Python Type Annotations Guide &mdash; Nickname: <strong>Python's Safety Labels</strong></p>
+    <p>Presented by: Sarah Princess Okike</p>
+  </footer>
+  <div style="text-align:center; margin: 40px 0;">
+  <button id="nextBtn" style="
+    background-color: #e8d71a;
+    color: #000;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  ">
+    ▶ Next Code Block
+  </button>
+</div>
+
+<script>
+  const blocks = document.querySelectorAll("pre code");
+  const nextBtn = document.getElementById("nextBtn");
+  let current = 0;
+
+  // Hide all blocks except the first
+  blocks.forEach((b, i) => {
+    if (i !== 0) b.parentElement.style.display = "none";
+  });
+
+  function typeCodeBlock(block, callback) {
+    const lines = block.textContent.trim().split("\\n");
+    block.innerHTML = "";
+    let lineIndex = 0;
+
+    function typeNextLine() {
+      if (lineIndex >= lines.length) {
+        if (callback) callback();
+        return;
+      }
+
+      const line = document.createElement("div");
+      line.textContent = "";
+      block.appendChild(line);
+
+      let charIndex = 0;
+      const chars = lines[lineIndex];
+
+      const typer = setInterval(() => {
+        line.textContent += chars[charIndex++];
+        if (charIndex === chars.length) {
+          clearInterval(typer);
+          lineIndex++;
+          setTimeout(typeNextLine, 100);
+        }
+      }, 20);
+    }
+
+    typeNextLine();
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (current >= blocks.length - 1) {
+      nextBtn.disabled = true;
+      nextBtn.textContent = "✅ All Code Blocks Shown";
+      return;
+    }
+
+    const currentBlock = blocks[current];
+    const nextBlock = blocks[current + 1];
+
+    currentBlock.parentElement.style.display = "none";
+    nextBlock.parentElement.style.display = "block";
+    nextBlock.innerHTML = nextBlock.textContent; // reset
+    typeCodeBlock(nextBlock);
+    current++;
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    typeCodeBlock(blocks[0]);
+  });
+</script>
+
+ 
+</body>
+</html>
+
